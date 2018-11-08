@@ -214,6 +214,10 @@
 		7B72DB292103CEB900A91156 /* AddBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB272103CEB900A91156 /* AddBlend.swift */; };
 		7B72DB2B2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
 		7B72DB2C2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
+		86B55DF9218C1F5200E6BD8F /* WaylensDewarp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B55DF7218C1F5200E6BD8F /* WaylensDewarp.swift */; };
+		86B55DFA218C1F5200E6BD8F /* WaylensDewarp.metal in Sources */ = {isa = PBXBuildFile; fileRef = 86B55DF8218C1F5200E6BD8F /* WaylensDewarp.metal */; };
+		86D0DA6C21942B81001A03E3 /* WaylensMovieInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D0DA6B21942B80001A03E3 /* WaylensMovieInput.swift */; };
+		86D0DA6E21942BCF001A03E3 /* WaylensMovieOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D0DA6D21942BCF001A03E3 /* WaylensMovieOutput.swift */; };
 		BC67D91820F815B60046D2C4 /* RenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E30E7320F11DD9005FA13C /* RenderView.swift */; };
 		BC7BA27420F2BD1E006B5F4B /* ShaderUniformSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7BA27320F2BD1E006B5F4B /* ShaderUniformSettings.swift */; };
 		BC7BA27720F2C269006B5F4B /* BrightnessAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7BA27620F2C269006B5F4B /* BrightnessAdjustment.swift */; };
@@ -381,6 +385,10 @@
 		7B25C0EB2103D5E9000EC621 /* ColorBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = ColorBlend.metal; path = Source/Operations/ColorBlend.metal; sourceTree = "<group>"; };
 		7B72DB272103CEB900A91156 /* AddBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBlend.swift; path = Source/Operations/AddBlend.swift; sourceTree = "<group>"; };
 		7B72DB2A2103CED000A91156 /* AddBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = AddBlend.metal; path = Source/Operations/AddBlend.metal; sourceTree = "<group>"; };
+		86B55DF7218C1F5200E6BD8F /* WaylensDewarp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaylensDewarp.swift; path = Source/Operations/WaylensDewarp.swift; sourceTree = "<group>"; };
+		86B55DF8218C1F5200E6BD8F /* WaylensDewarp.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = WaylensDewarp.metal; path = Source/Operations/WaylensDewarp.metal; sourceTree = "<group>"; };
+		86D0DA6B21942B80001A03E3 /* WaylensMovieInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaylensMovieInput.swift; path = Source/iOS/WaylensMovieInput.swift; sourceTree = "<group>"; };
+		86D0DA6D21942BCF001A03E3 /* WaylensMovieOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaylensMovieOutput.swift; path = Source/iOS/WaylensMovieOutput.swift; sourceTree = "<group>"; };
 		BC7BA27320F2BD1E006B5F4B /* ShaderUniformSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShaderUniformSettings.swift; path = Source/ShaderUniformSettings.swift; sourceTree = "<group>"; };
 		BC7BA27620F2C269006B5F4B /* BrightnessAdjustment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrightnessAdjustment.swift; path = Source/Operations/BrightnessAdjustment.swift; sourceTree = "<group>"; };
 		BC7BA27820F2C2CF006B5F4B /* BrightnessAdjustment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = BrightnessAdjustment.metal; path = Source/Operations/BrightnessAdjustment.metal; sourceTree = "<group>"; };
@@ -452,6 +460,7 @@
 		79E30E5C20ED6411005FA13C /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				86D0DA6B21942B80001A03E3 /* WaylensMovieInput.swift */,
 				79E30E5E20ED6434005FA13C /* Camera.swift */,
 				BC7BA28E20F5A275006B5F4B /* PictureInput.swift */,
 			);
@@ -470,6 +479,7 @@
 		79E30E7120F11DA4005FA13C /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				86D0DA6D21942BCF001A03E3 /* WaylensMovieOutput.swift */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -604,6 +614,8 @@
 		BCE0BE9720D6E39E0006E120 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				86B55DF8218C1F5200E6BD8F /* WaylensDewarp.metal */,
+				86B55DF7218C1F5200E6BD8F /* WaylensDewarp.swift */,
 				79E30E6520F10F72005FA13C /* BasicOperation.swift */,
 				BC7BA27A20F2C5E8006B5F4B /* OperationShaderTypes.h */,
 				79CB6E44210A55CB0042F87B /* BlendShaderTypes.h */,
@@ -811,11 +823,13 @@
 				793D932320F66236008A7A6E /* Luminance.swift in Sources */,
 				BCE0BEA620D6E3C80006E120 /* Matrix.swift in Sources */,
 				79CB6E2F210A0D800042F87B /* SoftLightBlend.swift in Sources */,
+				86B55DFA218C1F5200E6BD8F /* WaylensDewarp.metal in Sources */,
 				79CB6E14210931BE0042F87B /* NormalBlend.swift in Sources */,
 				79CB6E0821092E330042F87B /* LuminosityBlend.swift in Sources */,
 				7957438D20FE790E001EAE0A /* LuminanceRangeReduction.swift in Sources */,
 				79A81C882100E1B700A3B43A /* LevelsAdjustment.swift in Sources */,
 				79DD50C7213450CB004EF308 /* SwirlDistortion.metal in Sources */,
+				86B55DF9218C1F5200E6BD8F /* WaylensDewarp.swift in Sources */,
 				79E30E6620F10F72005FA13C /* BasicOperation.swift in Sources */,
 				BCE0BEA820D6E3C80006E120 /* ImageOrientation.swift in Sources */,
 				79CB6DD52108B4090042F87B /* ColorDodgeBlend.metal in Sources */,
@@ -847,6 +861,7 @@
 				79CB6E0B21092E3E0042F87B /* LuminosityBlend.metal in Sources */,
 				79CB6DEA210926220042F87B /* ExclusionBlend.swift in Sources */,
 				79CB6E0221092D710042F87B /* LinearBurnBlend.swift in Sources */,
+				86D0DA6C21942B81001A03E3 /* WaylensMovieInput.swift in Sources */,
 				79CB6DCF2108B1BC0042F87B /* ColorBurnBlend.metal in Sources */,
 				7B25C0E32103D328000EC621 /* AlphaBlend.swift in Sources */,
 				793D933820F68C70008A7A6E /* ContrastAdjustment.metal in Sources */,
@@ -866,6 +881,7 @@
 				79CB6E0E210931110042F87B /* MultiplyBlend.swift in Sources */,
 				7B72DB282103CEB900A91156 /* AddBlend.swift in Sources */,
 				BC7FC40C212B2B3800B37FB6 /* OperationGroup.swift in Sources */,
+				86D0DA6E21942BCF001A03E3 /* WaylensMovieOutput.swift in Sources */,
 				79DD50CA21345492004EF308 /* Vignette.swift in Sources */,
 				793D933520F68C1B008A7A6E /* ContrastAdjustment.swift in Sources */,
 				79A81CA321010A2E00A3B43A /* Vibrance.metal in Sources */,
@@ -1095,7 +1111,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1118,6 +1134,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1174,6 +1191,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1186,6 +1204,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1201,7 +1220,7 @@
 				PRODUCT_NAME = GPUImage;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1226,7 +1245,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.redqueencoder.GPUImage;
 				PRODUCT_NAME = GPUImage;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -170,6 +170,7 @@ public class Camera: NSObject, ImageSource, AVCaptureVideoDataOutputSampleBuffer
             if let concreteTexture = textureRef,
                 let cameraTexture = CVMetalTextureGetTexture(concreteTexture) {
                 let texture = Texture(orientation: self.location.imageOrientation(), texture: cameraTexture)
+                texture.timingStyle = .videoFrame(timestamp:Timestamp(currentTime))
                 self.updateTargetsWithTexture(texture)
             }
             

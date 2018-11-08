@@ -15,6 +15,7 @@ public func defaultVertexFunctionNameForInputs(_ inputCount:UInt) -> String {
 open class BasicOperation: ImageProcessingOperation {
     
     public let maximumInputs: UInt
+    public var overriddenOutputSize: Size?
     public let targets = TargetContainer()
     public let sources = SourceContainer()
     
@@ -70,12 +71,17 @@ open class BasicOperation: ImageProcessingOperation {
             let outputHeight:Int
             
             let firstInputTexture = inputTextures[0]!
-            if firstInputTexture.orientation.rotationNeeded(for:.portrait).flipsDimensions() {
-                outputWidth = firstInputTexture.texture.height
-                outputHeight = firstInputTexture.texture.width
+            if let outputSize = overriddenOutputSize {
+                outputWidth = Int(outputSize.width)
+                outputHeight = Int(outputSize.height)
             } else {
-                outputWidth = firstInputTexture.texture.width
-                outputHeight = firstInputTexture.texture.height
+                if firstInputTexture.orientation.rotationNeeded(for:.portrait).flipsDimensions() {
+                    outputWidth = firstInputTexture.texture.height
+                    outputHeight = firstInputTexture.texture.width
+                } else {
+                    outputWidth = firstInputTexture.texture.width
+                    outputHeight = firstInputTexture.texture.height
+                }
             }
             
             guard let commandBuffer = sharedMetalRenderingDevice.commandQueue.makeCommandBuffer() else {return}
@@ -99,8 +105,30 @@ open class BasicOperation: ImageProcessingOperation {
                 commandBuffer.renderQuad(pipelineState: renderPipelineState, uniformSettings: uniformSettings, inputTextures: inputTextures, useNormalizedTextureCoordinates: useNormalizedTextureCoordinates, outputTexture: outputTexture)
             }
             commandBuffer.commit()
-            
+            releaseIncomingTexturesAndUpdateTimestamp(outputTexture)
             updateTargetsWithTexture(outputTexture)
         }
+    }
+    
+    func releaseIncomingTexturesAndUpdateTimestamp(_ outputTexture: Texture) {
+        var remainingTextures = [UInt:Texture]()
+        // If all inputs are still images, have this output behave as one
+        outputTexture.timingStyle = .stillImage
+        
+        var latestTimestamp:Timestamp?
+        for (key, texture) in inputTextures {
+            
+            // When there are multiple transient input sources, use the latest timestamp as the value to pass along
+            if let timestamp = texture.timingStyle.timestamp {
+                if !(timestamp < (latestTimestamp ?? timestamp)) {
+                    latestTimestamp = timestamp
+                    outputTexture.timingStyle = .videoFrame(timestamp:timestamp)
+                }
+                
+            } else {
+                remainingTextures[key] = texture
+            }
+        }
+        inputTextures = remainingTextures
     }
 }
