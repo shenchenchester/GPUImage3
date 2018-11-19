@@ -7,8 +7,8 @@
 //
 
 public class WaylensDewarp: BasicOperation {
-    public var splitMode:Float = 0 { didSet { uniformSettings[0] = splitMode } }  // 1: split; 0: oneside; 2: immersive;
-    public var showTimeLabel:Float = 0 { didSet { uniformSettings[1] = showTimeLabel } }  // 1: show; 0: no
+    public var splitMode:Int = 0 { didSet { uniformSettings[0] = Float(splitMode) } }  // 1: split; 0: oneside; 2: immersive;
+    public var showTimeLabel:Bool = false { didSet { uniformSettings[1] = showTimeLabel ? 1.0 : 0.0 } }  // 1: show; 0: no
     public var immersiveAngle:Float = 0 { didSet { uniformSettings[2] = immersiveAngle } } // 0-360. 0: towards front
     
     public init() {

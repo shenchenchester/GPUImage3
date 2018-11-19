@@ -214,6 +214,8 @@
 		7B72DB292103CEB900A91156 /* AddBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB272103CEB900A91156 /* AddBlend.swift */; };
 		7B72DB2B2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
 		7B72DB2C2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
+		863D6FF92195531600DE7AED /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863D6FF82195531600DE7AED /* DisplayView.swift */; };
+		863D70B521991A6800DE7AED /* YUV2RGB.metal in Sources */ = {isa = PBXBuildFile; fileRef = 863D70B421991A6700DE7AED /* YUV2RGB.metal */; };
 		86B55DF9218C1F5200E6BD8F /* WaylensDewarp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B55DF7218C1F5200E6BD8F /* WaylensDewarp.swift */; };
 		86B55DFA218C1F5200E6BD8F /* WaylensDewarp.metal in Sources */ = {isa = PBXBuildFile; fileRef = 86B55DF8218C1F5200E6BD8F /* WaylensDewarp.metal */; };
 		86D0DA6C21942B81001A03E3 /* WaylensMovieInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D0DA6B21942B80001A03E3 /* WaylensMovieInput.swift */; };
@@ -385,6 +387,8 @@
 		7B25C0EB2103D5E9000EC621 /* ColorBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = ColorBlend.metal; path = Source/Operations/ColorBlend.metal; sourceTree = "<group>"; };
 		7B72DB272103CEB900A91156 /* AddBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBlend.swift; path = Source/Operations/AddBlend.swift; sourceTree = "<group>"; };
 		7B72DB2A2103CED000A91156 /* AddBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = AddBlend.metal; path = Source/Operations/AddBlend.metal; sourceTree = "<group>"; };
+		863D6FF82195531600DE7AED /* DisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisplayView.swift; path = ../../SC360/SC360/DisplayView.swift; sourceTree = "<group>"; };
+		863D70B421991A6700DE7AED /* YUV2RGB.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = YUV2RGB.metal; path = Source/Operations/YUV2RGB.metal; sourceTree = "<group>"; };
 		86B55DF7218C1F5200E6BD8F /* WaylensDewarp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaylensDewarp.swift; path = Source/Operations/WaylensDewarp.swift; sourceTree = "<group>"; };
 		86B55DF8218C1F5200E6BD8F /* WaylensDewarp.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = WaylensDewarp.metal; path = Source/Operations/WaylensDewarp.metal; sourceTree = "<group>"; };
 		86D0DA6B21942B80001A03E3 /* WaylensMovieInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaylensMovieInput.swift; path = Source/iOS/WaylensMovieInput.swift; sourceTree = "<group>"; };
@@ -605,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				79E30E7320F11DD9005FA13C /* RenderView.swift */,
+				863D6FF82195531600DE7AED /* DisplayView.swift */,
 				79E30E7220F11DAA005FA13C /* Mac */,
 				79E30E7120F11DA4005FA13C /* iOS */,
 			);
@@ -614,6 +619,7 @@
 		BCE0BE9720D6E39E0006E120 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				863D70B421991A6700DE7AED /* YUV2RGB.metal */,
 				86B55DF8218C1F5200E6BD8F /* WaylensDewarp.metal */,
 				86B55DF7218C1F5200E6BD8F /* WaylensDewarp.swift */,
 				79E30E6520F10F72005FA13C /* BasicOperation.swift */,
@@ -842,6 +848,7 @@
 				BC9294A62105134E006C8E93 /* ColorMatrixFilter.swift in Sources */,
 				BCC6AB6C210E635B00F9803A /* Convolution3x3.metal in Sources */,
 				BCE0BE9E20D6E3C80006E120 /* Color.swift in Sources */,
+				863D6FF92195531600DE7AED /* DisplayView.swift in Sources */,
 				7B72DB2B2103CED000A91156 /* AddBlend.metal in Sources */,
 				79CB6DD82108BC650042F87B /* DarkenBlend.swift in Sources */,
 				BCE0BEA220D6E3C80006E120 /* Position.swift in Sources */,
@@ -879,6 +886,7 @@
 				79EB1B862125D7550049135E /* ChromaKeyBlend.swift in Sources */,
 				79E30E6F20F11989005FA13C /* Timestamp.swift in Sources */,
 				79CB6E0E210931110042F87B /* MultiplyBlend.swift in Sources */,
+				863D70B521991A6800DE7AED /* YUV2RGB.metal in Sources */,
 				7B72DB282103CEB900A91156 /* AddBlend.swift in Sources */,
 				BC7FC40C212B2B3800B37FB6 /* OperationGroup.swift in Sources */,
 				86D0DA6E21942BCF001A03E3 /* WaylensMovieOutput.swift in Sources */,

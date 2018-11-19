@@ -50,7 +50,7 @@ public class Texture {
 }
 
 extension Texture {
-    func textureCoordinates(for outputOrientation:ImageOrientation, normalized:Bool) -> [Float] {
+    public func textureCoordinates(for outputOrientation:ImageOrientation, normalized:Bool) -> [Float] {
         let inputRotation = self.orientation.rotationNeeded(for:outputOrientation)
 
         let xLimit:Float
