@@ -32,7 +32,14 @@ infix operator --> : AdditionPrecedence
 
 public extension ImageSource {
     public func addTarget(_ target:ImageConsumer, atTargetIndex:UInt? = nil) {
-        if let targetIndex = atTargetIndex {
+        if let previousIndex = targets.find(target) {
+            if let targetIndex = atTargetIndex, targetIndex != previousIndex {
+                target.removeSourceAtIndex(previousIndex)
+                targets.remove(target)
+                target.setSource(self, atIndex:targetIndex)
+                targets.append(target, indexAtTarget:targetIndex)
+            }
+        } else if let targetIndex = atTargetIndex {
             target.setSource(self, atIndex:targetIndex)
             targets.append(target, indexAtTarget:targetIndex)
             transmitPreviousImage(to:target, atIndex:targetIndex)
@@ -44,6 +51,13 @@ public extension ImageSource {
         }
     }
 
+    public func removeTarget(_ target: ImageConsumer) {
+        if let index = targets.find(target) {
+            target.removeSourceAtIndex(index)
+            targets.remove(target)
+        }
+    }
+    
     public func removeAllTargets() {
         for (target, index) in targets {
             target.removeSourceAtIndex(index)
@@ -65,6 +79,11 @@ public extension ImageSource {
             target.newTextureAvailable(texture, fromSourceIndex:index)
         }
     }
+    
+    public func hasTarget(_ target: ImageConsumer) -> Bool {
+        return targets.find(target) != nil
+    }
+    
 }
 
 public extension ImageConsumer {
@@ -132,6 +151,28 @@ public class TargetContainer:Sequence {
             self.targets.removeAll()
         }
     }
+    
+    public func find(_ target: ImageConsumer) -> UInt? {
+        var index: UInt?
+        dispatchQueue.sync {
+            let result = targets.first { (item) -> Bool in
+                return item.value === target
+            }
+            index = result?.indexAtTarget
+        }
+        return index
+    }
+    
+    public func remove(_ target: ImageConsumer) {
+        dispatchQueue.async {
+            let result = self.targets.enumerated().first { (item) -> Bool in
+                return item.element.value === target
+            }
+            if let index = result?.offset {
+                self.targets.remove(at: index)
+            }
+        }
+    }
 }
 
 public class SourceContainer {
@@ -176,7 +217,8 @@ public class ImageRelay: ImageProcessingOperation {
     }
     
     public func transmitPreviousImage(to target:ImageConsumer, atIndex:UInt) {
-        sources.sources[0]?.transmitPreviousImage(to:self, atIndex:0)
+//        sources.sources[0]?.transmitPreviousImage(to:self, atIndex:0)
+        // may cause duplicated rendering in MTKView
     }
 
     public func newTextureAvailable(_ texture: Texture, fromSourceIndex: UInt) {
