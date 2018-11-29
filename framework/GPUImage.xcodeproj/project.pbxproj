@@ -214,6 +214,8 @@
 		7B72DB292103CEB900A91156 /* AddBlend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB272103CEB900A91156 /* AddBlend.swift */; };
 		7B72DB2B2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
 		7B72DB2C2103CED000A91156 /* AddBlend.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7B72DB2A2103CED000A91156 /* AddBlend.metal */; };
+		862DA35B21AEA181007B1001 /* TextureCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862DA35A21AEA181007B1001 /* TextureCache.swift */; };
+		862DA35C21AEA181007B1001 /* TextureCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862DA35A21AEA181007B1001 /* TextureCache.swift */; };
 		863D6FF92195531600DE7AED /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863D6FF82195531600DE7AED /* DisplayView.swift */; };
 		863D70B521991A6800DE7AED /* YUV2RGB.metal in Sources */ = {isa = PBXBuildFile; fileRef = 863D70B421991A6700DE7AED /* YUV2RGB.metal */; };
 		86B55DF9218C1F5200E6BD8F /* WaylensDewarp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B55DF7218C1F5200E6BD8F /* WaylensDewarp.swift */; };
@@ -398,6 +400,7 @@
 		7B25C0EB2103D5E9000EC621 /* ColorBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = ColorBlend.metal; path = Source/Operations/ColorBlend.metal; sourceTree = "<group>"; };
 		7B72DB272103CEB900A91156 /* AddBlend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBlend.swift; path = Source/Operations/AddBlend.swift; sourceTree = "<group>"; };
 		7B72DB2A2103CED000A91156 /* AddBlend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = AddBlend.metal; path = Source/Operations/AddBlend.metal; sourceTree = "<group>"; };
+		862DA35A21AEA181007B1001 /* TextureCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextureCache.swift; path = Source/TextureCache.swift; sourceTree = "<group>"; };
 		863D6FF82195531600DE7AED /* DisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisplayView.swift; path = ../../SC360/SC360/DisplayView.swift; sourceTree = "<group>"; };
 		863D70B421991A6700DE7AED /* YUV2RGB.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = YUV2RGB.metal; path = Source/Operations/YUV2RGB.metal; sourceTree = "<group>"; };
 		86B55DF7218C1F5200E6BD8F /* WaylensDewarp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaylensDewarp.swift; path = Source/Operations/WaylensDewarp.swift; sourceTree = "<group>"; };
@@ -627,6 +630,7 @@
 				79E30E6B20F118CD005FA13C /* Texture.swift */,
 				795B05D720F270FF00D1E759 /* MetalRendering.swift */,
 				BC7BA27320F2BD1E006B5F4B /* ShaderUniformSettings.swift */,
+				862DA35A21AEA181007B1001 /* TextureCache.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -888,6 +892,7 @@
 				79CB6DE12108C9200042F87B /* DifferenceBlend.metal in Sources */,
 				86CD857621A7FFF5009BFF1C /* TimestampExtraction.swift in Sources */,
 				79CB6E0521092D7C0042F87B /* LinearBurnBlend.metal in Sources */,
+				862DA35B21AEA181007B1001 /* TextureCache.swift in Sources */,
 				BCC6AB62210E5ECE00F9803A /* NearbyTexelSampling.metal in Sources */,
 				BC9294A62105134E006C8E93 /* ColorMatrixFilter.swift in Sources */,
 				BCC6AB6C210E635B00F9803A /* Convolution3x3.metal in Sources */,
@@ -1075,6 +1080,7 @@
 				7B72DB292103CEB900A91156 /* AddBlend.swift in Sources */,
 				BC7FC40D212B2B3800B37FB6 /* OperationGroup.swift in Sources */,
 				79DD50CB21345492004EF308 /* Vignette.swift in Sources */,
+				862DA35C21AEA181007B1001 /* TextureCache.swift in Sources */,
 				793D933320F68A32008A7A6E /* ExposureAdjustment.metal in Sources */,
 				79A81CA421010A2E00A3B43A /* Vibrance.metal in Sources */,
 				79CB6DF4210927180042F87B /* HardLightBlend.metal in Sources */,

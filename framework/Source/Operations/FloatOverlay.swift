@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-public class FloatOverlay: BasicOperation {
+public class FloatOverlay: SynchronziedOperation {
     public var frame: CGRect = CGRect.zero {
         didSet {
             updateFrame(frame)

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Red Queen Coder, LLC. All rights reserved.
 //
 
-public class TimestampExtraction: BasicOperation {
+public class TimestampExtraction: SynchronziedOperation {
     public init() {
         super.init(fragmentFunctionName:"timestampExtractionFragment", numberOfInputs:1)
     }

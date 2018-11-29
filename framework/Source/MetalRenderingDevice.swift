@@ -12,6 +12,7 @@ public class MetalRenderingDevice {
     public let commandQueue: MTLCommandQueue
     public let shaderLibrary: MTLLibrary
     public let metalPerformanceShadersAreSupported: Bool
+    public let cache: TextureCache
     
     lazy var passthroughRenderState: MTLRenderPipelineState = {
         generateRenderPipelineState(device:self, vertexFunctionName:"oneInputVertex", fragmentFunctionName:"passthroughFragment", operationName:"Passthrough")
@@ -38,5 +39,7 @@ public class MetalRenderingDevice {
         } catch {
             fatalError("Could not load library")
         }
+        
+        cache = TextureCache()
     }
 }

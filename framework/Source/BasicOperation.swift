@@ -105,7 +105,6 @@ open class BasicOperation: ImageProcessingOperation {
                 commandBuffer.renderQuad(pipelineState: renderPipelineState, uniformSettings: uniformSettings, inputTextures: inputTextures, useNormalizedTextureCoordinates: useNormalizedTextureCoordinates, outputTexture: outputTexture)
             }
             commandBuffer.commit()
-            commandBuffer.waitUntilCompleted()
             releaseIncomingTexturesAndUpdateTimestamp(outputTexture)
             updateTargetsWithTexture(outputTexture)
         }

@@ -7,10 +7,7 @@
 //
 
 import Foundation
-public protocol SynchronizedSource: class, ImageSource {
-    var hasNewTexture: Bool { get set }
-    var outputTexture: Texture? { get }
-}
+import Metal
 
 public protocol SynchronizedConsumer: ImageConsumer {
     var needUpdateTexture: Bool { get set }
@@ -18,14 +15,45 @@ public protocol SynchronizedConsumer: ImageConsumer {
 
 public class SynchronziedOperation: BasicOperation, SynchronizedConsumer {
     public var needUpdateTexture: Bool = false
-    
     override public func newTextureAvailable(_ texture: Texture, fromSourceIndex: UInt) {
         needUpdateTexture = false
-        super.newTextureAvailable(texture, fromSourceIndex: fromSourceIndex)
+        let _ = textureInputSemaphore.wait(timeout:DispatchTime.distantFuture)
+        defer {
+            textureInputSemaphore.signal()
+        }
+        
+        inputTextures[fromSourceIndex] = texture
+        
+        if (UInt(inputTextures.count) >= maximumInputs) {
+            let outputWidth:Int
+            let outputHeight:Int
+            
+            let firstInputTexture = inputTextures[0]!
+            if let outputSize = overriddenOutputSize {
+                outputWidth = Int(outputSize.width)
+                outputHeight = Int(outputSize.height)
+            } else {
+                if firstInputTexture.orientation.rotationNeeded(for:.portrait).flipsDimensions() {
+                    outputWidth = firstInputTexture.texture.height
+                    outputHeight = firstInputTexture.texture.width
+                } else {
+                    outputWidth = firstInputTexture.texture.width
+                    outputHeight = firstInputTexture.texture.height
+                }
+            }
+            
+            guard let commandBuffer = sharedMetalRenderingDevice.commandQueue.makeCommandBuffer() else {return}
+            
+            let outputTexture = sharedMetalRenderingDevice.cache.requestTexture(width: outputWidth, height: outputHeight)
+            commandBuffer.renderQuad(pipelineState: renderPipelineState, uniformSettings: uniformSettings, inputTextures: inputTextures, useNormalizedTextureCoordinates: useNormalizedTextureCoordinates, outputTexture: outputTexture)
+            commandBuffer.commit()
+            releaseIncomingTexturesAndUpdateTimestamp(outputTexture)
+            updateTargetsWithTexture(outputTexture)
+        }
     }
 }
 
-extension ImageConsumer {
+public extension ImageConsumer {
     func downStreamNeedUpdate() -> Bool {
         if let this = self as? SynchronizedConsumer, this.needUpdateTexture {
             return true
@@ -37,28 +65,5 @@ extension ImageConsumer {
             }
         }
         return false
-    }
-}
-
-extension ImageSource {
-    public func updateTargetsIfNeeded() {
-        if let this = self as? SynchronizedSource, let texture = this.outputTexture {
-            if this.hasNewTexture {
-                this.hasNewTexture = false
-                updateTargetsWithTexture(texture)
-            } else {
-                for (target, index) in targets {
-                    if target.downStreamNeedUpdate() {
-                        target.newTextureAvailable(texture, fromSourceIndex:index)
-                    }
-                }
-            }
-        } else {
-            for (target, _) in targets {
-                if let target = target as? ImageSource {
-                    target.updateTargetsIfNeeded()
-                }
-            }
-        }
     }
 }

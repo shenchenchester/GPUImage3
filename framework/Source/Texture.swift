@@ -27,10 +27,13 @@ public class Texture {
     public var orientation: ImageOrientation
     
     public let texture: MTLTexture
-    
+    weak var cache: TextureCache? = nil
+    var hash: Int64
+//    var retainCount: Int = 1
     public init(orientation: ImageOrientation, texture: MTLTexture) {
         self.orientation = orientation
         self.texture = texture
+        self.hash = hashForTexture(width: texture.width, height: texture.height, pixelFormat: texture.pixelFormat, mipmapped: texture.mipmapLevelCount != 1)
     }
     
     public init(device:MTLDevice, orientation: ImageOrientation, pixelFormat: MTLPixelFormat = .bgra8Unorm, width: Int, height: Int, mipmapped:Bool = false) {
@@ -46,6 +49,15 @@ public class Texture {
 
         self.orientation = orientation
         self.texture = newTexture
+        self.hash = hashForTexture(width: width, height: height, pixelFormat: pixelFormat, mipmapped: mipmapped)
+    }
+    
+    deinit {
+        if let cache = cache {
+            let newTexture = Texture(orientation: orientation, texture: texture)
+            newTexture.cache = cache
+            cache.returnToCache(newTexture)
+        }
     }
 }
 
