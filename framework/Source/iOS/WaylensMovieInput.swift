@@ -142,7 +142,7 @@ public class WaylensMovieInput: ImageSource {
             }
             numberOfFramesRead += 1
             let currentSampleTime = CMSampleBufferGetOutputPresentationTimeStamp(sampleBuffer)
-            NSLog("read video frame at time: %f, frame count %d", currentSampleTime.seconds, numberOfFramesRead)
+//            NSLog("read video frame at time: %f, frame count %d", currentSampleTime.seconds, numberOfFramesRead)
             self.delegate?.onConsumeProgress(Float(currentSampleTime.seconds / asset.duration.seconds))
             self.process(frame:sampleBuffer)
             

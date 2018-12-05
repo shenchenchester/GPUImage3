@@ -15,9 +15,6 @@ public class DisplayView: MTKView, ImageConsumer {
     public let maximumInputs: UInt = 1
     var currentTexture: Texture?
     var renderPipelineState:MTLRenderPipelineState!
-    var startTime: TimeInterval = 0
-    var renderCount: Int = 0
-    var lastDrawableId: Int = -1
     public override init(frame frameRect: CGRect, device: MTLDevice?) {
         super.init(frame: frameRect, device: sharedMetalRenderingDevice.device)
         
@@ -49,23 +46,6 @@ public class DisplayView: MTKView, ImageConsumer {
     
     public override func draw(_ rect: CGRect) {
         if let currentDrawable = self.currentDrawable, let texture = currentTexture {
-            if CFAbsoluteTimeGetCurrent() - startTime > 5 {
-                startTime = CFAbsoluteTimeGetCurrent()
-                renderCount = 0
-            } else {
-                renderCount += 1
-                let fps = Double(renderCount) / (CFAbsoluteTimeGetCurrent() - startTime)
-                print("Display FPS \(fps)")
-            }
-            if #available(iOS 10.3, *) {
-                
-                if currentDrawable.drawableID <= lastDrawableId {
-                    print("Duplicated drawable id", currentDrawable.drawableID)
-                }
-                lastDrawableId = currentDrawable.drawableID
-            } else {
-                // Fallback on earlier versions
-            }
             let commandBuffer = sharedMetalRenderingDevice.commandQueue.makeCommandBuffer()
             
             let outputTexture = Texture(orientation: .portrait, texture: currentDrawable.texture)
@@ -74,9 +54,6 @@ public class DisplayView: MTKView, ImageConsumer {
             commandBuffer?.present(currentDrawable)
             commandBuffer?.commit()
 //            commandBuffer?.waitUntilCompleted()
-//            if let error = commandBuffer?.error {
-//                print(error)
-//            }
             currentTexture = nil
         }
     }
