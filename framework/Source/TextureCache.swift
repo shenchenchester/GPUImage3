@@ -33,6 +33,28 @@ public class TextureCache {
         }
     }
     
+    public var count: Int {
+        var c = 0
+        queue.sync {
+            for textures in cache.values {
+                c += textures.count
+            }
+        }
+        return c
+    }
+    
+    public var totalBytes: Int64 {
+        var c: Int64 = 0
+        queue.sync {
+            for textures in cache.values {
+                if let texture = textures.first?.texture {
+                    c += Int64(textures.count * texture.width * texture.height) * 4
+                }
+            }
+        }
+        return c
+    }
+    
     func returnToCache(_ texture: Texture) {
         queue.async {
             if self.cache[texture.hash] != nil {

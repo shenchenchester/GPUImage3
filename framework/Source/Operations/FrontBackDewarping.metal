@@ -18,7 +18,7 @@ fragment half4 frontbackDewarpingFragment(SingleInputVertexIO fragmentInput [[st
     
     float2 textureCoordinateToUse;
     float2 textureCoordinate = fragmentInput.textureCoordinate;
-    float widthPitch = 1952.0/1984.0;
+    float widthPitch = 1.0;
     
     if (textureCoordinate.y > 0.5)
     {

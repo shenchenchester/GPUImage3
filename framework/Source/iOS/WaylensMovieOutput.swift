@@ -19,7 +19,7 @@ public class WaylensMovieOutput: ImageConsumer {
     public let sources = SourceContainer()
     public let maximumInputs:UInt = 1
     
-    var widthPitch : Float = 1952.0/1984.0
+//    var widthPitch: Float
     
     let assetWriter:AVAssetWriter
     let assetWriterVideoInput:AVAssetWriterInput
@@ -45,9 +45,9 @@ public class WaylensMovieOutput: ImageConsumer {
     public weak var delegate : WaylensMovieOutputDelegate?
 
     
-    public init(URL:Foundation.URL, size:Size, dele: WaylensMovieOutputDelegate, fileType:AVFileType = .mov, liveVideo:Bool = false, settings:[String:AnyObject]? = nil, widthpitch: Float = 1952.0/1984.0) throws {
+    public init(URL:Foundation.URL, size:Size, dele: WaylensMovieOutputDelegate, fileType:AVFileType = .mov, liveVideo:Bool = false, settings:[String:AnyObject]? = nil) throws {
         
-        widthPitch = widthpitch
+//        widthPitch = widthpitch
         self.size = size
         delegate = dele
         assetWriter = try AVAssetWriter(url:URL, fileType:fileType)
@@ -75,7 +75,7 @@ public class WaylensMovieOutput: ImageConsumer {
         assetWriterVideoInput.expectsMediaDataInRealTime = liveVideo
         encodingLiveVideo = liveVideo
         
-        // You need to use BGRA for the video in order to get realtime encoding. I use a color-swizzling shader to line up glReadPixels' normal RGBA output with the movie input's BGRA.
+        // You need to use BGRA for the video in order to get realtime encoding.
         let sourcePixelBufferAttributesDictionary:[String:AnyObject] = [kCVPixelBufferPixelFormatTypeKey as String:NSNumber(value:Int32(kCVPixelFormatType_32BGRA)),
                                                                         kCVPixelBufferWidthKey as String:NSNumber(value:size.width),
                                                                         kCVPixelBufferHeightKey as String:NSNumber(value:size.height)]
@@ -143,7 +143,6 @@ public class WaylensMovieOutput: ImageConsumer {
     }
     
     public func newTextureAvailable(_ texture: Texture, fromSourceIndex: UInt) {
-     
         guard isRecording else { return }
         // Ignore still images and other non-video updates (do I still need this?)
         guard let frameTime = texture.timingStyle.timestamp?.asCMTime else { return }
@@ -185,7 +184,7 @@ public class WaylensMovieOutput: ImageConsumer {
             
             commandBuffer?.renderQuad(pipelineState: sharedMetalRenderingDevice.passthroughRenderState, inputTextures: [0:texture], outputTexture: self.renderTexture)
             commandBuffer?.commit()
-            
+            commandBuffer?.waitUntilCompleted()
             if (!self.assetWriterPixelBufferInput.append(self.pixelBuffer!, withPresentationTime:frameTime)) {
                 debugPrint("Problem appending pixel buffer at time: \(frameTime)")
             }

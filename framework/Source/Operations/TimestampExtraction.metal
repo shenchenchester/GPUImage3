@@ -19,7 +19,12 @@ fragment half4 timestampExtractionFragment(SingleInputVertexIO fragmentInput [[s
     float2 textureCoordinate = fragmentInput.textureCoordinate;
     
     textureCoordinateToUse = float2(textureCoordinate.x * 0.19057, textureCoordinate.y * 0.01025);
-    return inputTexture.sample(quadSampler, textureCoordinateToUse );
+    half4 color = inputTexture.sample(quadSampler, textureCoordinateToUse);
+    if (color.r < 0.3 || color.g < 0.3 || color.b < 0.3) {
+        return half4(0, 0, 0, 1);
+    } else {
+        return color;
+    }
 }
 
 

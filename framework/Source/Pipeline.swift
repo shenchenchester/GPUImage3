@@ -2,7 +2,7 @@
 // MARK: Basic types
 import Foundation
 
-public protocol ImageSource {
+public protocol ImageSource:AnyObject {
     var targets:TargetContainer { get }
     func transmitPreviousImage(to target:ImageConsumer, atIndex:UInt)
 }

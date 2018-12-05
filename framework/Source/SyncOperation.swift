@@ -9,11 +9,11 @@
 import Foundation
 import Metal
 
-public protocol SynchronizedConsumer: ImageConsumer {
-    var needUpdateTexture: Bool { get set }
+public protocol CachedImageSource: ImageSource {
+    var outputTexture: Texture? { get }
 }
 
-public class SynchronziedOperation: BasicOperation, SynchronizedConsumer {
+public class SynchronziedOperation: BasicOperation {
     public var needUpdateTexture: Bool = false
     override public func newTextureAvailable(_ texture: Texture, fromSourceIndex: UInt) {
         needUpdateTexture = false
@@ -48,18 +48,60 @@ public class SynchronziedOperation: BasicOperation, SynchronizedConsumer {
             commandBuffer.renderQuad(pipelineState: renderPipelineState, uniformSettings: uniformSettings, inputTextures: inputTextures, useNormalizedTextureCoordinates: useNormalizedTextureCoordinates, outputTexture: outputTexture)
             commandBuffer.commit()
             releaseIncomingTexturesAndUpdateTimestamp(outputTexture)
+            commandBuffer.waitUntilCompleted()
             updateTargetsWithTexture(outputTexture)
+        }
+    }
+    
+    override func releaseIncomingTexturesAndUpdateTimestamp(_ outputTexture: Texture) {
+        // If all inputs are still images, have this output behave as one
+        outputTexture.timingStyle = .stillImage
+        
+        var latestTimestamp:Timestamp?
+        for (_, texture) in inputTextures {
+            // When there are multiple transient input sources, use the latest timestamp as the value to pass along
+            if let timestamp = texture.timingStyle.timestamp {
+                if !(timestamp < (latestTimestamp ?? timestamp)) {
+                    latestTimestamp = timestamp
+                    outputTexture.timingStyle = .videoFrame(timestamp:timestamp)
+                }
+            }
+        }
+        autoreleasepool {
+            inputTextures = [UInt:Texture]()
         }
     }
 }
 
-public extension ImageConsumer {
-    func downStreamNeedUpdate() -> Bool {
-        if let this = self as? SynchronizedConsumer, this.needUpdateTexture {
+public enum TextureUpdateResult {
+    case notNeed
+    case needUpdate
+    case updated
+}
+
+public class CachedImageRelay: ImageRelay, CachedImageSource {
+    public var outputTexture: Texture?
+   
+    public override func newTextureAvailable(_ texture: Texture, fromSourceIndex: UInt) {
+        outputTexture = texture
+        super.newTextureAvailable(texture, fromSourceIndex: fromSourceIndex)
+    }
+}
+
+public extension ImageSource {
+    func updateTargetIfNeeded() -> Bool {
+        if let this = self as? SynchronziedOperation, this.needUpdateTexture {
             return true
-        } else if let source = self as? ImageSource {
-            for (target, _) in source.targets {
-                if target.downStreamNeedUpdate() {
+        }
+        var texture: Texture? = nil
+        if let this = self as? CachedImageSource {
+            texture = this.outputTexture
+        }
+        for (target, index) in targets {
+            if let sourceTarget = target as? ImageProcessingOperation, sourceTarget.updateTargetIfNeeded() {
+                if let texture = texture {
+                    sourceTarget.newTextureAvailable(texture, fromSourceIndex: index)
+                } else {
                     return true
                 }
             }
