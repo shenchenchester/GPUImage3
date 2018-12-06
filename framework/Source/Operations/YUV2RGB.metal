@@ -18,17 +18,22 @@ fragment float4 YUV2RGBFragment(SingleInputVertexIO in [[stage_in]],
                                    mag_filter::linear,
                                    min_filter::linear);
     
-    const float4x4 ycbcrToRGBTransform = float4x4(
-        float4(+1.0000f, +1.0000f, +1.0000f, +0.0000f),
-        float4(+0.0000f, -0.3441f, +1.7720f, +0.0000f),
-        float4(+1.4020f, -0.7141f, +0.0000f, +0.0000f),
-        float4(-0.7010f, +0.5291f, -0.8860f, +1.0000f)
+    const float3x3 ycbcrToRGBTransform_BT709 = float3x3(
+        float3(1.164, 1.164, 1.164),
+        float3(0, -0.213, 2.112),
+        float3(1.793, -0.533, 0)
     );
+//    const float3x3 ycbcrToRGBTransform_BT601 = float3x3(
+//        float3(+1.1644f, +1.1644f, +1.1644f),
+//        float3(+0.0000f, -0.3918f, +2.0172f),
+//        float3(+1.5960f, -0.8130f, +0.0000f)
+//    );
     
     // Sample Y and CbCr textures to get the YCbCr color at the given texture coordinate
-    float4 ycbcr = float4(textureY.sample(colorSampler, in.textureCoordinate).r,
-                          textureCbCr.sample(colorSampler, in.textureCoordinate).rg, 1.0);
+    float3 ycbcr = float3(textureY.sample(colorSampler, in.textureCoordinate).r - 16.0 / 255.0,
+                          textureCbCr.sample(colorSampler, in.textureCoordinate).rg - 128.0 / 255.0);
+    
     
     // Return converted RGB color
-    return ycbcrToRGBTransform * ycbcr;
+    return float4(ycbcrToRGBTransform_BT709 * ycbcr, 1.0);
 }
