@@ -233,6 +233,8 @@
 		86CD857621A7FFF5009BFF1C /* TimestampExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CD857221A7FFF4009BFF1C /* TimestampExtraction.swift */; };
 		86D0DA6C21942B81001A03E3 /* WaylensMovieInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D0DA6B21942B80001A03E3 /* WaylensMovieInput.swift */; };
 		86D0DA6E21942BCF001A03E3 /* WaylensMovieOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D0DA6D21942BCF001A03E3 /* WaylensMovieOutput.swift */; };
+		86E8BE0B21DDE83A004EDA72 /* BallDewarping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E8BE0A21DDE83A004EDA72 /* BallDewarping.swift */; };
+		86E8BE0D21DDE9BB004EDA72 /* BallDewarping.metal in Sources */ = {isa = PBXBuildFile; fileRef = 86E8BE0C21DDE9BB004EDA72 /* BallDewarping.metal */; };
 		BC67D91820F815B60046D2C4 /* RenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E30E7320F11DD9005FA13C /* RenderView.swift */; };
 		BC7BA27420F2BD1E006B5F4B /* ShaderUniformSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7BA27320F2BD1E006B5F4B /* ShaderUniformSettings.swift */; };
 		BC7BA27720F2C269006B5F4B /* BrightnessAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7BA27620F2C269006B5F4B /* BrightnessAdjustment.swift */; };
@@ -418,6 +420,8 @@
 		86CD857221A7FFF4009BFF1C /* TimestampExtraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimestampExtraction.swift; path = Source/Operations/TimestampExtraction.swift; sourceTree = "<group>"; };
 		86D0DA6B21942B80001A03E3 /* WaylensMovieInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaylensMovieInput.swift; path = Source/iOS/WaylensMovieInput.swift; sourceTree = "<group>"; };
 		86D0DA6D21942BCF001A03E3 /* WaylensMovieOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaylensMovieOutput.swift; path = Source/iOS/WaylensMovieOutput.swift; sourceTree = "<group>"; };
+		86E8BE0A21DDE83A004EDA72 /* BallDewarping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BallDewarping.swift; path = Source/Operations/BallDewarping.swift; sourceTree = "<group>"; };
+		86E8BE0C21DDE9BB004EDA72 /* BallDewarping.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = BallDewarping.metal; path = Source/Operations/BallDewarping.metal; sourceTree = "<group>"; };
 		BC7BA27320F2BD1E006B5F4B /* ShaderUniformSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShaderUniformSettings.swift; path = Source/ShaderUniformSettings.swift; sourceTree = "<group>"; };
 		BC7BA27620F2C269006B5F4B /* BrightnessAdjustment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrightnessAdjustment.swift; path = Source/Operations/BrightnessAdjustment.swift; sourceTree = "<group>"; };
 		BC7BA27820F2C2CF006B5F4B /* BrightnessAdjustment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; name = BrightnessAdjustment.metal; path = Source/Operations/BrightnessAdjustment.metal; sourceTree = "<group>"; };
@@ -529,6 +533,8 @@
 				86CD855021A6819D009BFF1C /* PerspectiveDewarping.metal */,
 				86CD855221A68290009BFF1C /* FrontBackDewarping.metal */,
 				86CD857121A7FFF4009BFF1C /* FrontBackDewarping.swift */,
+				86E8BE0A21DDE83A004EDA72 /* BallDewarping.swift */,
+				86E8BE0C21DDE9BB004EDA72 /* BallDewarping.metal */,
 			);
 			name = Dewarping;
 			sourceTree = "<group>";
@@ -870,6 +876,7 @@
 				862DA39921AFC1A5007B1001 /* DisplayView.swift in Sources */,
 				79A81C8B2100E1C500A3B43A /* LevelsAdjustment.metal in Sources */,
 				BCE0BEA020D6E3C80006E120 /* Size.swift in Sources */,
+				86E8BE0B21DDE83A004EDA72 /* BallDewarping.swift in Sources */,
 				79CB6DFC21092B940042F87B /* LightenBlend.swift in Sources */,
 				7957438A20FE3CFE001EAE0A /* HighlightsAndShadows.metal in Sources */,
 				86CD853121A2DD5F009BFF1C /* PanoramaDewarping.metal in Sources */,
@@ -941,6 +948,7 @@
 				863D70B521991A6800DE7AED /* YUV2RGB.metal in Sources */,
 				7B72DB282103CEB900A91156 /* AddBlend.swift in Sources */,
 				BC7FC40C212B2B3800B37FB6 /* OperationGroup.swift in Sources */,
+				86E8BE0D21DDE9BB004EDA72 /* BallDewarping.metal in Sources */,
 				86D0DA6E21942BCF001A03E3 /* WaylensMovieOutput.swift in Sources */,
 				79DD50CA21345492004EF308 /* Vignette.swift in Sources */,
 				793D933520F68C1B008A7A6E /* ContrastAdjustment.swift in Sources */,

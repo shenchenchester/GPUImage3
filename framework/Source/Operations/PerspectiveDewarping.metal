@@ -45,13 +45,13 @@ fragment half4 perspectiveDewarpingFragment(SingleInputVertexIO fragmentInput [[
     float tmpy = -(cosb * sint);
     float phi = atan( tmpx / tmpy);
     if (tmpx > 0) {
-        if (tmpy < 0) {
+        if (tmpy <= 0) {
             phi = -phi;
         } else {
             phi = Pi - phi;
         }
     } else {
-        if (tmpy < 0) {
+        if (tmpy <= 0) {
             phi = -phi;
         } else {
             phi = -Pi - phi;
