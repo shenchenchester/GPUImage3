@@ -33,10 +33,17 @@ public class BallDewarping: SynchronziedOperation, ViewPortOnDome {
             needUpdateTexture = true
         }
     }
+    public var facedown: Float  = 0.0 {
+        didSet {
+            uniformSettings[4] = facedown
+            needUpdateTexture = true
+        }
+    }
     public init() {
         super.init(fragmentFunctionName:"ballDewarpingFragment", numberOfInputs:1)
         uniformSettings.appendUniform(0)
         uniformSettings.appendUniform(90)
+        uniformSettings.appendUniform(0)
         uniformSettings.appendUniform(0)
         uniformSettings.appendUniform(0)
     }

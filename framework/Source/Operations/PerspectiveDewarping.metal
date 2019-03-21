@@ -17,6 +17,7 @@ typedef struct {
     float latitude;
     float viewAngleX;
     float viewAngleY;
+    float facedown;
 } perspectiveDewarpingUniform;
 
 
@@ -25,8 +26,9 @@ fragment half4 perspectiveDewarpingFragment(SingleInputVertexIO fragmentInput [[
                                  constant perspectiveDewarpingUniform& uniform [[buffer(1)]])
 {
     constexpr sampler quadSampler;
-    float deltaY = atan((fragmentInput.textureCoordinate.y * 2 - 1) * tan(uniform.viewAngleY * Pi / 180.0));
-    float deltaX = atan((fragmentInput.textureCoordinate.x * 2 - 1) * tan(uniform.viewAngleX * Pi / 180.0));
+    float si = 1 - uniform.facedown * 2;
+    float deltaY = atan(si * (fragmentInput.textureCoordinate.y * 2 - 1) * tan(uniform.viewAngleY * Pi / 180.0));
+    float deltaX = atan(si * (fragmentInput.textureCoordinate.x * 2 - 1) * tan(uniform.viewAngleX * Pi / 180.0));
     float theta = (90 - uniform.latitude) * Pi / 180.0;
     float cosa = cos(deltaY);
     float sina = sin(deltaY);

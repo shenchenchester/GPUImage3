@@ -19,6 +19,7 @@ examples/FilterShowcase/build*
 *.pbxuser
 *.xcworkspace
 xcuserdata
+.arcconfig
 
 # Documentation
 documentation/*

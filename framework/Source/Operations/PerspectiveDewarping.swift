@@ -13,15 +13,17 @@ public protocol ViewPortOnDome: class {
     var latitude: Float { get set }
     var viewAngleY: Float { get set }
     var viewAngleX: Float { get set }
+    var facedown: Float { get set }
     var overriddenOutputSize: Size? { get }
 }
 
 public extension ViewPortOnDome {
-    func updateViewPort(latitude: Float, longitude: Float, viewAngleY: Float, viewAngleX: Float) {
+    func updateViewPort(latitude: Float, longitude: Float, viewAngleY: Float, viewAngleX: Float, facedown: Bool=false) {
         self.latitude = latitude
         self.longitude = longitude
         self.viewAngleY = viewAngleY
         self.viewAngleX = viewAngleX
+        self.facedown = facedown ? 1 : 0
     }
 }
 
@@ -50,6 +52,12 @@ public class PerspectiveDewarping: SynchronziedOperation, ViewPortOnDome {
             needUpdateTexture = true
         }
     }
+    public var facedown: Float  = 0.0 {
+        didSet {
+            uniformSettings[4] = facedown
+            needUpdateTexture = true
+        }
+    }
     
     public init() {
         super.init(fragmentFunctionName:"perspectiveDewarpingFragment", numberOfInputs:1)
@@ -57,6 +65,7 @@ public class PerspectiveDewarping: SynchronziedOperation, ViewPortOnDome {
         uniformSettings.appendUniform(0)
         uniformSettings.appendUniform(54)
         uniformSettings.appendUniform(30)
+        uniformSettings.appendUniform(0)
     }
 }
 

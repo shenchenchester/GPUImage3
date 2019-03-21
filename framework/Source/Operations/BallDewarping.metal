@@ -17,6 +17,7 @@ typedef struct {
     float latitude;
     float viewAngleX;
     float viewAngleY;
+    float facedown;
 } BallDewarpingUniform;
 
 
@@ -25,8 +26,9 @@ fragment half4 ballDewarpingFragment(SingleInputVertexIO fragmentInput [[stage_i
                                          constant BallDewarpingUniform& uniform [[buffer(1)]])
 {
     constexpr sampler quadSampler;
-    float scaleZ = uniform.viewAngleY / 180.0;
-    float scaleY = uniform.viewAngleX / 180.0;
+    float si = 1 - uniform.facedown * 2;
+    float scaleZ = si * uniform.viewAngleY / 180.0;
+    float scaleY = si * uniform.viewAngleX / 180.0;
     float z = (1 - fragmentInput.textureCoordinate.y * 2) * scaleZ;
     float x = (fragmentInput.textureCoordinate.x * 2 - 1) * scaleY;
     float latRadian = uniform.latitude / 180.0 * Pi;

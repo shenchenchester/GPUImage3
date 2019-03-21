@@ -31,6 +31,12 @@ public class PanoramaDewarping: SynchronziedOperation, ViewPortOnDome {
             needUpdateTexture = true
         }
     }
+    public var facedown: Float  = 0.0 {  // 0 ~ 55
+        didSet {
+            uniformSettings[4] = facedown
+            needUpdateTexture = true
+        }
+    }
     
     public init() {
         super.init(fragmentFunctionName:"panoramaDewarpingFragment", numberOfInputs:1)
@@ -38,5 +44,6 @@ public class PanoramaDewarping: SynchronziedOperation, ViewPortOnDome {
         uniformSettings.appendUniform(0)
         uniformSettings.appendUniform(54)
         uniformSettings.appendUniform(30)
+        uniformSettings.appendUniform(0)
     }
 }
